@@ -1,0 +1,183 @@
+offerings:
+- name: random-id
+  displayName: Random ID
+  description: Generates a random ID via Terraform
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: random-id
+  tags:
+  - random
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Generates a random ID
+      - Useful for quick demos
+
+- name: aws-s3-bucket
+  displayName: AWS S3 Bucket
+  description: Provisions an AWS S3 bucket
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: aws-s3-bucket
+    bindingDirectory: aws-s3-bucket/binding
+  tags:
+  - aws
+  - s3
+  env:
+    AWS_ACCESS_KEY_ID: ${awsAccessKeyId}
+    AWS_SECRET_ACCESS_KEY: ${awsSecretAccessKey}
+    AWS_DEFAULT_REGION: ${awsRegion}
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Private bucket
+      - No versioning
+      - No replication
+
+- name: aws-rds-postgres
+  displayName: AWS RDS Postgres
+  description: AWS RDS Postgres database
+  longDescription: |
+    AWS RDS Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgre driver.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonRDS_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/rds/
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: aws-rds-postgres
+  bullets:
+  tags:
+  - postgresql
+  - database
+  - aws
+  env:
+    AWS_ACCESS_KEY_ID: ${awsAccessKeyId}
+    AWS_SECRET_ACCESS_KEY: ${awsSecretAccessKey}
+    AWS_DEFAULT_REGION: ${awsRegion}
+  plans:
+    dev:
+      name: dev
+      displayName: Development
+      description: Dev plan
+      bullets:
+      - Single AZ
+      - 20Gb Storage
+    prod:
+      name: prod
+      displayName: Production
+      description: Prod plan
+      bullets:
+      - Multiple AZs
+      - 100Gb Storage
+      parameters:
+        disk_size: 100
+        multi_az: true
+
+- name: gcp-sql-postgres
+  displayName: GCP CloudSQL Postgres
+  description: GCP CloudSQL Postgres database
+  longDescription: |
+    GCP Cloud SQL Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgre driver.
+  imageUrl: https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Cloud-SQL-Logo.svg/1024px-Cloud-SQL-Logo.svg.png
+  documentationUrl: https://cloud.google.com/sql/docs/postgres/
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: gcp-sql-postgres
+  tags:
+  - postgresql
+  - database
+  - gcp
+  env:
+    GOOGLE_REGION: ${googleRegion}
+    GOOGLE_PROJECT: ${googleProject}
+    GOOGLE_CREDENTIALS: ${googleCredentials}
+  plans:
+    dev:
+      name: dev
+      displayName: Development
+      description: Dev plan
+      bullets:
+        - Zonal Availability
+        - 20Gb Storage
+    prod:
+      name: prod
+      displayName: Production
+      description: Prod plan
+      bullets:
+        - Regional Availability
+        - 100Gb Storage
+      parameters:
+        disk_size: 100
+        multi_az: true
+
+- name: gke-rabbitmq
+  displayName: RabbitMQ on GKE
+  description: RabbitMQ running on GKE
+  imageUrl: https://cdn.worldvectorlogo.com/logos/rabbitmq.svg
+  documentationUrl: https://www.rabbitmq.com/getstarted.html
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: gke-rabbitmq
+  tags:
+  - rabbitmq
+  - k8s
+  - gcp
+  env:
+    GOOGLE_REGION: ${googleRegion}
+    GOOGLE_PROJECT: ${googleProject}
+    GOOGLE_CREDENTIALS: ${googleCredentials}
+    GOOGLE_ZONE: ${googleZone}
+  plans:
+    dev:
+      name: dev
+      displayName: Development
+      description: Dev plan
+
+- name: vault-kv
+  displayName: Vault K/V
+  description: Hashicorp Vault Key/Value backend
+  imageUrl: https://s3.amazonaws.com/hashicorp-marketing-web-assets/brand/Vault_VerticalLogo_FullColor.B1xPC0pSax.svg
+  documentationUrl: https://www.vaultproject.io/docs/secrets/kv/index.html
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: vault-kv
+  tags:
+  - vault
+  env:
+    VAULT_ADDR: ${vaultAddr}
+    VAULT_TOKEN: ${vaultToken}
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Dedicated K/V backend for generic secrets
+      - Vault token with read/write access
+
+- name: vault-cf-auth
+  displayName: Vault CF Auth example
+  description: Example of using the CloudFoundry auth method for Hashicorp Vault
+  imageUrl: https://s3.amazonaws.com/hashicorp-marketing-web-assets/brand/Vault_VerticalLogo_FullColor.B1xPC0pSax.svg
+  documentationUrl: https://www.vaultproject.io/docs/secrets/kv/index.html
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: vault-cf-auth
+  tags:
+  - vault
+  env:
+    VAULT_ADDR: ${vaultAddr}
+    VAULT_TOKEN: ${vaultToken}
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Dedicated K/V backend for generic secrets
+      - Bound applications will be given read/write access
