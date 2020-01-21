@@ -19,6 +19,7 @@ offerings:
 - name: aws-s3-bucket
   displayName: AWS S3 Bucket
   description: Provisions an AWS S3 bucket
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonS3_LARGE.png
   providerDisplayName: Terraform
   vcs:
     instanceDirectory: aws-s3-bucket
