@@ -45,7 +45,7 @@ offerings:
   displayName: AWS RDS Postgres
   description: AWS RDS Postgres database
   longDescription: |
-    AWS RDS Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgre driver.
+    AWS RDS Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgres driver.
   imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonRDS_LARGE.png
   documentationUrl: https://aws.amazon.com/documentation/rds/
   providerDisplayName: Terraform
@@ -83,7 +83,7 @@ offerings:
   displayName: GCP CloudSQL Postgres
   description: GCP CloudSQL Postgres database
   longDescription: |
-    GCP Cloud SQL Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgre driver.
+    GCP Cloud SQL Postgres service provides a managed persistent database offering that can be integrated to via any standard Postgres driver.
   imageUrl: https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Cloud-SQL-Logo.svg/1024px-Cloud-SQL-Logo.svg.png
   documentationUrl: https://cloud.google.com/sql/docs/postgres/
   providerDisplayName: Terraform
