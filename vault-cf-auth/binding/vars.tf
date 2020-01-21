@@ -9,3 +9,11 @@ variable "service_binding_id" {
 variable "application_guid" {
 
 }
+
+variable "terraform_instance_workspace" {
+
+}
+
+variable "terraform_organization" {
+
+}
