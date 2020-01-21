@@ -1,6 +1,8 @@
 resource "aws_s3_bucket" "bucket" {
   bucket = "instance-${var.service_instance_id}"
   acl    = "private"
+  
+  force_destroy = "true"
 }
 
 resource "aws_iam_user" "user" {
