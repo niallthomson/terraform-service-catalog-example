@@ -168,6 +168,7 @@ offerings:
   providerDisplayName: Terraform
   vcs:
     instanceDirectory: vault-cf-auth
+    bindingDirectory: vault-cf-auth/binding
   tags:
   - vault
   env:
