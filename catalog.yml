@@ -183,3 +183,28 @@ offerings:
       bullets:
       - Dedicated K/V backend for generic secrets
       - Bound applications will be given read/write access
+
+- name: vault-cf-kitchen-sink
+  displayName: Vault CF Kitchen Sink example
+  description: Example of using the CloudFoundry auth method for Hashicorp Vault
+  imageUrl: https://s3.amazonaws.com/hashicorp-marketing-web-assets/brand/Vault_VerticalLogo_FullColor.B1xPC0pSax.svg
+  documentationUrl: https://www.vaultproject.io/docs/secrets/kv/index.html
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: vault-cf-kitchen-sink
+  tags:
+  - vault
+  env:
+    VAULT_ADDR: ${vaultAddr}
+    VAULT_TOKEN: ${vaultToken}
+    AWS_ACCESS_KEY_ID: ${awsAccessKeyId}
+    AWS_SECRET_ACCESS_KEY: ${awsSecretAccessKey}
+    AWS_DEFAULT_REGION: ${awsRegion}
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Dedicated K/V backend for generic secrets
+      - Bound applications will be given read/write access
