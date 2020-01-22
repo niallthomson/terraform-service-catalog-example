@@ -2,6 +2,10 @@ provider "vault" {
 
 }
 
+locals {
+  vault_url = "https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip"
+}
+
 resource "vault_policy" "policy" {
   name = "instance-${var.service_instance_id}"
 
