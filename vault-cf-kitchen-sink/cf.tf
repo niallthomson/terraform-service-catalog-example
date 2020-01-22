@@ -8,7 +8,6 @@ wget -q https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip &
 bound_space_ids=${var.space_guid} \
 policies=${vault_policy.policy.name} \
 disable_ip_matching=true
-rm vault vault_1.3.1_linux_amd64.zip
 EOT
   }
 
@@ -18,7 +17,6 @@ EOT
 set -e
 wget -q https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip && unzip vault_1.3.1_linux_amd64.zip && chmod +x vault
 ./vault delete auth/cf/roles/instance-${var.service_instance_id}
-rm vault vault_1.3.1_linux_amd64.zip
 EOT
   }
 }

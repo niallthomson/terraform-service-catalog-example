@@ -61,7 +61,6 @@ resource "vault_database_secret_backend_connection" "mysql" {
 set -e
 wget -q https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip && unzip vault_1.3.1_linux_amd64.zip && chmod +x vault
 ./vault lease revoke -prefix ${vault_mount.db.path}/creds
-rm vault vault_1.3.1_linux_amd64.zip
 EOT
   }
 }
