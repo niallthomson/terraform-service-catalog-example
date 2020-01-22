@@ -155,7 +155,7 @@ output "vaultaddr" {
 }
 
 output "vaultrole" {
-  value = "${vault_policy.policy.name}"
+  value = "role"
 }
 
 output "databasebackend" {
