@@ -53,6 +53,17 @@ resource "vault_database_secret_backend_connection" "mysql" {
   mysql {
     connection_url = "${var.user}:${random_password.password.result}@tcp(${aws_db_instance.default.endpoint})/"
   }
+
+  # This is terrible and I'm just doing it so I can clean up
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = <<EOT
+set -e
+wget -q https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip && unzip vault_1.3.1_linux_amd64.zip && chmod +x vault
+./vault lease revoke -prefix ${vault_mount.db.path}/creds
+rm vault vault_1.3.1_linux_amd64.zip
+EOT
+  }
 }
 
 resource "vault_database_secret_backend_role" "role" {
