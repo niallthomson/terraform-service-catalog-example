@@ -17,19 +17,19 @@ path "${vault_aws_secret_backend.aws.path}/creds/role" {
 }
 
 ## Transit
-path "${vault_mount.transit.path}/encrypt/default-key" {
+path "${vault_mount.transit.path}/encrypt/default_key" {
   capabilities = ["create", "update", "read"]
 }
 
-path "${vault_mount.transit.path}/decrypt/default-key" {
+path "${vault_mount.transit.path}/decrypt/default_key" {
   capabilities = ["create", "update", "read"]
 }
 
-path "${vault_mount.transit.path}/rotate/default-key" {
+path "${vault_mount.transit.path}/rotate/default_key" {
   capabilities = ["create", "update", "read"]
 }
 
-path "${vault_mount.transit.path}/rewrap/default-key" {
+path "${vault_mount.transit.path}/rewrap/default_key" {
   capabilities = ["create", "update", "read"]
 }
 EOT
