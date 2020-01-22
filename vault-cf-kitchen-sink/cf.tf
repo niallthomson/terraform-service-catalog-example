@@ -7,7 +7,7 @@ resource "null_resource" "cf_role" {
   provisioner "local-exec" {
     command = <<EOT
 set -e
-if [ ! -f vault ]; then wget -O vault.zip -q ${local.vault_url} && unzip vault.zip && chmod +x vault && rm vault.zip; fi
+wget -O vault.zip -q ${local.vault_url} && unzip -o vault.zip && chmod +x vault && rm vault.zip
 ./vault write auth/cf/roles/instance-${var.service_instance_id} \
 bound_space_ids=${var.space_guid} \
 policies=${vault_policy.policy.name} \
@@ -19,7 +19,7 @@ EOT
     when    = "destroy"
     command = <<EOT
 set -e
-if [ ! -f vault ]; then wget -O vault.zip -q ${local.vault_url} && unzip vault.zip && chmod +x vault && rm vault.zip; fi
+wget -O vault.zip -q ${local.vault_url} && unzip -o vault.zip && chmod +x vault && rm vault.zip
 ./vault delete auth/cf/roles/instance-${var.service_instance_id}
 EOT
   }
