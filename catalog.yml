@@ -192,6 +192,7 @@ offerings:
   providerDisplayName: Terraform
   vcs:
     instanceDirectory: vault-cf-kitchen-sink
+    bindingDirectory: vault-cf-kitchen-sink/binding
   tags:
   - vault
   env:
