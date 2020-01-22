@@ -29,7 +29,7 @@ resource "aws_db_instance" "default" {
 resource "aws_security_group" "default" {
   name = "mydb-sg-${var.service_instance_id}"
 
-  description = "RDS postgres servers (terraform-managed)"
+  description = "RDS mysql servers (terraform-managed)"
 
   # Only postgres in
   ingress {
@@ -48,6 +48,42 @@ resource "aws_security_group" "default" {
   }
 }
 
+resource "vault_mount" "db" {
+  path = "instance-${var.service_instance_id}-db"
+  type = "database"
+}
+
+resource "vault_database_secret_backend_connection" "mysql" {
+  backend       = "${vault_mount.db.path}"
+  name          = "mysql"
+  allowed_roles = ["role"]
+
+  mysql {
+    connection_url = "${var.user}:${random_password.password.result}@tcp(${aws_db_instance.default.endpoint})/"
+  }
+
+  # This is terrible and I'm just doing it so I can clean up
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = <<EOT
+set -e
+if [ ! -f vault ]; then wget -O vault.zip -q ${local.vault_url} && unzip vault.zip && chmod +x vault && rm vault.zip; fi
+./vault lease revoke -prefix ${vault_mount.db.path}/creds
+EOT
+  }
+}
+
+resource "vault_database_secret_backend_role" "role" {
+  backend             = "${vault_mount.db.path}"
+  name                = "role"
+  db_name             = "${vault_database_secret_backend_connection.mysql.name}"
+  creation_statements = ["CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL PRIVILEGES ON mydb.* TO '{{name}}'@'%';"]
+}
+
 output "jdbc" {
   value = "jdbc:mysql://${aws_db_instance.default.endpoint}/${aws_db_instance.default.name}"
+}
+
+output "vault_database_backend" {
+  value = "${vault_mount.db.path}"
 }

@@ -17,3 +17,7 @@ variable "terraform_instance_workspace" {
 variable "terraform_organization" {
 
 }
+
+variable "cf_backend" { 
+  default = "cf"
+}
