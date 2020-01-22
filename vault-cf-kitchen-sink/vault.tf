@@ -59,7 +59,7 @@ resource "vault_database_secret_backend_connection" "mysql" {
     when    = "destroy"
     command = <<EOT
 set -e
-wget -q https://releases.hashicorp.com/vault/1.3.1/vault_1.3.1_linux_amd64.zip && unzip vault_1.3.1_linux_amd64.zip && chmod +x vault
+if [ ! -f vault ]; then wget -O vault.zip -q ${local.vault_url} && unzip vault.zip && chmod +x vault && rm vault.zip; fi
 ./vault lease revoke -prefix ${vault_mount.db.path}/creds
 EOT
   }
