@@ -19,10 +19,12 @@ resource "null_resource" "cf_role" {
     command = <<EOT
 set -e
 wget -O vault.zip -q ${local.vault_url} && unzip -o vault.zip && chmod +x vault && rm vault.zip
+
 ./vault write auth/${var.cf_backend}/roles/${local.role_name} \
-bound_application_ids=${var.application_guid} \
-policies=${data.terraform_remote_state.instance.vault_policy_name} \
-disable_ip_matching=true
+  bound_application_ids=${var.application_guid} \
+  policies=${data.terraform_remote_state.instance.vault_policy_name} \
+  disable_ip_matching=true
+
 EOT
   }
 
@@ -31,7 +33,9 @@ EOT
     command = <<EOT
 set -e
 wget -O vault.zip -q ${local.vault_url} && unzip -o vault.zip && chmod +x vault && rm vault.zip
+
 ./vault delete auth/${var.cf_backend}/roles/${local.role_name}
+
 EOT
   }
 }
