@@ -209,3 +209,30 @@ offerings:
       bullets:
       - Dedicated K/V backend for generic secrets
       - Bound applications will be given read/write access
+
+- name: pas-2.8-aws
+  displayName: Pivotal Application Service 2.8 (AWS)
+  description: Provisions a new install of Pivotal Application Service 2.8 on AWS
+  imageUrl: https://dtb5pzswcit1e.cloudfront.net/assets/images/product_logos/icon_pivotalapplicationservice@2x.png
+  providerDisplayName: Terraform
+  vcs:
+    instanceDirectory: pas-2.8-aws
+  tags:
+  - pas
+  - aws
+  env:
+    AWS_ACCESS_KEY_ID: ${awsAccessKeyId}
+    AWS_SECRET_ACCESS_KEY: ${awsSecretAccessKey}
+    AWS_DEFAULT_REGION: ${awsRegion}
+    TF_VAR_pivnet_token: ${pivnetToken}
+    TF_VAR_dns_suffix: aws.paasify.org
+  plans:
+    default:
+      name: default
+      displayName: Default
+      description: Default plan
+      bullets:
+      - Pivotal Application Service Small Footprint
+      - Version 2.8
+      - Running on Amazon Web Service
+      - 1 Diego cell
