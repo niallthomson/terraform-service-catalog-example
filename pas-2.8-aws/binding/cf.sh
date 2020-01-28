@@ -12,6 +12,6 @@ export OM_TARGET=$opsman_host
 export OM_USERNAME=admin
 export OM_PASSWORD=$opsman_password
 
-cf_password=$(./om credentials -p cf -c .uaa.admin_credentials -t json | jq -r '.password')
+cf_password=$(./om credentials -p cf -c .uaa.admin_credentials -t json | ./jq -r '.password')
 
 ./jq -n --arg cf_password "$cf_password" '{"cf_password":$cf_password}'
