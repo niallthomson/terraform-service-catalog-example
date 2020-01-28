@@ -12,8 +12,8 @@ data "external" "cf_info" {
   program = ["bash", "${path.module}/cf.sh"]
 
   query = {
-    opsman_host     = "${terraform_remote_state.instance.opsman_host}"
-    opsman_password = "${terraform_remote_state.instance.opsman_password}"
+    opsman_host     = "${data.terraform_remote_state.instance.opsman_host}"
+    opsman_password = "${data.terraform_remote_state.instance.opsman_password}"
   }
 }
 
