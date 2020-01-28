@@ -217,6 +217,7 @@ offerings:
   providerDisplayName: Terraform
   vcs:
     instanceDirectory: pas-2.8-aws
+    bindingDirectory: pas-2.8-aws/binding
   tags:
   - pas
   - aws
