@@ -17,6 +17,14 @@ data "external" "cf_info" {
   }
 }
 
+output "cf_username" {
+  value = "admin"
+}
+
 output "cf_password" {
   value = "${data.external.cf_info.result.cf_password}"
+}
+
+output "cf_api_endpoint" {
+  value = "${data.terraform_remote_state.instance.cf_api_endpoint}"
 }
